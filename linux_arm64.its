@@ -1,0 +1,59 @@
+/*
+ * Copyright 2017 - 2021 NXP
+ *
+ */
+
+
+/dts-v1/;
+
+/ {
+	description = "arm64 kernel and FDT blob";
+	#address-cells = <1>;
+
+	images {
+		kernel {
+			description = "ARM64 Kernel";
+			data = /incbin/("./arch/arm64/boot/Image.gz");
+			type = "kernel";
+			arch = "arm64";
+			os = "linux";
+			compression = "gzip";
+			load = <0x84080000>;
+			entry = <0x84080000>;
+		};
+
+		ls1043a-rdb-dtb {
+			description = "ls1043ardb-dtb";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb-sdk.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			os = "linux";
+			compression = "none";
+			load = <0x90000000>;
+		};
+
+		ls1046a-rdb-dtb {
+			description = "ls1046ardb-dtb";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-ls1046a-rdb-sdk.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			os = "linux";
+			compression = "none";
+			load = <0x90000000>;
+		};
+	};
+
+	configurations {
+		ls1043a-rdb {
+			description = "config for ls1043ardb";
+			kernel = "kernel";
+			fdt = "ls1043a-rdb-dtb";
+		};
+
+		ls1046a-rdb {
+			description = "config for ls1046ardb";
+			kernel = "kernel";
+			fdt = "ls1046a-rdb-dtb";
+		};
+	};
+};
