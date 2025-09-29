@@ -1,0 +1,98 @@
+/dts-v1/;
+
+/ {
+	description = "ubinux nxp-soc kernel and FDT blob";
+	#address-cells = <1>;
+
+	images {
+		kernel {
+			description = "ARM64 Kernel";
+			data = /incbin/("./arch/arm64/boot/Image.gz");
+			type = "kernel";
+			arch = "arm64";
+			os = "linux";
+			compression = "gzip";
+			load = <0x84000000>;
+			entry = <0x84000000>;
+		};
+
+		ls1043a-rdb-dtb {
+			description = "ls1043ardb-dtb";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb-sdk.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x90000000>;
+		};
+
+		ls1046a-rdb-dtb {
+			description = "ls1046ardb-dtb";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-ls1046a-rdb-sdk.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x90000000>;
+		};
+
+		lx2160a-rdb-dtb {
+			description = "lx2160ardb-dtb";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-lx2160a-rdb.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x90000000>;
+		};
+
+		ls1088a-rdb-dtb {
+			description = "ls1088ardb-dtb";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-ls1088a-rdb.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x90000000>;
+		};
+
+		ls1046a-frwy-dtb {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("./arch/arm64/boot/dts/freescale/fsl-ls1046a-frwy-sdk.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x90000000>;
+		};
+	};
+
+	configurations {
+		default = "ls1046a-frwy";
+
+		ls1043a-rdb {
+			description = "config for ls1043ardb";
+			kernel = "kernel";
+			fdt = "ls1043a-rdb-dtb";
+		};
+
+		ls1046a-rdb {
+			description = "config for ls1046ardb";
+			kernel = "kernel";
+			fdt = "ls1046a-rdb-dtb";
+		};
+
+		lx2160a-rdb {
+			description = "config for lx2160ardb";
+			kernel = "kernel";
+			fdt = "lx2160a-rdb-dtb";
+		};
+
+		ls1088a-rdb {
+			description = "config for ls1088ardb";
+			kernel = "kernel";
+			fdt = "ls1088a-rdb-dtb";
+		};
+
+		ls1046a-frwy {
+			description = "config for ls1046a-frwy";
+			kernel = "kernel";
+			fdt = "ls1046a-frwy-dtb";
+		};
+	};
+};
